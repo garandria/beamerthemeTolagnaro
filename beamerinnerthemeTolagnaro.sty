@@ -1,0 +1,34 @@
+\mode<presentation>
+
+% venue
+\newcommand{\venue}{\@dblarg\nord@venue}
+\long\def\nord@venue[#1]#2{%
+  \def\insertvenue{#2}%
+  \def\nord@shortvenue{#1}%
+}
+\venue{}
+\newcommand\insertshortvenue[1][]{%
+  \let\thanks=\@gobble%
+  \beamer@setupshort{#1}%
+  \beamer@insertshort{\nord@shortvenue}}
+
+\setbeamertemplate{title page}{
+  \renewcommand\thefootnote{\fnsymbol{footnote}}
+  \setcounter{footnote}{1} % \dagger
+  {\usebeamerfont{title}\usebeamercolor[fg]{title}\bfseries\boldmath\inserttitle\par}
+  \ifx\insertsubtitle\@empty\else\vspace{1em}{\usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}\insertsubtitle\par}\fi\vspace{3em}
+  \ifx\insertvenue\@empty\else{\usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}\insertvenue\par}\vspace{1.5em}\fi
+  {\usebeamerfont{author}\usebeamercolor{author}\insertauthor\par}
+  \ifx\insertinstitute\@empty\else\vspace{.5em}{\usebeamerfont{institute}\usebeamercolor{institute}\insertinstitute\par}\fi
+  \vspace{1.5em}
+  {\usebeamerfont{date}\usebeamercolor{date}\insertdate\par}
+  \renewcommand\thefootnote{\arabic{footnote}}
+  \setcounter{footnote}{0}
+}
+
+\setbeamertemplate{itemize item}[triangle]
+\setbeamertemplate{itemize subitem}[circle]
+\setbeamertemplate{itemize subsubitem}[square]
+
+\mode
+<all>
